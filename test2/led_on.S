@@ -1,0 +1,14 @@
+.text
+.global _start
+_start:
+  LDR R0,=0x40021018
+  MOV R1,#0x4
+  STR R1,[R0]
+  LDR R0,=0x40010c00
+  MOV R1,#0x00000001
+  STR R1,[R0]
+  LDR R0,=0x40010c0c
+  MOV R1,#0x00000000
+  STR R1,[R0]
+MAIN_LOOP:
+  B MAIN_LOOP

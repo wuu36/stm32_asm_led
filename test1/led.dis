@@ -1,0 +1,58 @@
+
+led_on.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+08000000 <_reset-0x8>:
+ 8000000:	00000000 	andeq	r0, r0, r0
+ 8000004:	08000009 	stmdaeq	r0, {r0, r3}
+
+08000008 <_reset>:
+ 8000008:	480e      	ldr	r0, [pc, #56]	; (8000044 <delay+0x8>)
+ 800000a:	6801      	ldr	r1, [r0, #0]
+ 800000c:	f041 0108 	orr.w	r1, r1, #8
+ 8000010:	6001      	str	r1, [r0, #0]
+ 8000012:	480d      	ldr	r0, [pc, #52]	; (8000048 <delay+0xc>)
+ 8000014:	6801      	ldr	r1, [r0, #0]
+ 8000016:	f441 1180 	orr.w	r1, r1, #1048576	; 0x100000
+ 800001a:	6001      	str	r1, [r0, #0]
+ 800001c:	4a0b      	ldr	r2, [pc, #44]	; (800004c <delay+0x10>)
+
+0800001e <loop>:
+ 800001e:	6811      	ldr	r1, [r2, #0]
+ 8000020:	f041 0120 	orr.w	r1, r1, #32
+ 8000024:	6011      	str	r1, [r2, #0]
+ 8000026:	480a      	ldr	r0, [pc, #40]	; (8000050 <delay+0x14>)
+ 8000028:	f000 f808 	bl	800003c <delay>
+ 800002c:	6811      	ldr	r1, [r2, #0]
+ 800002e:	f021 0120 	bic.w	r1, r1, #32
+ 8000032:	6011      	str	r1, [r2, #0]
+ 8000034:	4806      	ldr	r0, [pc, #24]	; (8000050 <delay+0x14>)
+ 8000036:	f000 f801 	bl	800003c <delay>
+ 800003a:	e7f0      	b.n	800001e <loop>
+
+0800003c <delay>:
+ 800003c:	3801      	subs	r0, #1
+ 800003e:	d1fd      	bne.n	800003c <delay>
+ 8000040:	4770      	bx	lr
+ 8000042:	10180000 	andsne	r0, r8, r0
+ 8000046:	0c004002 	stceq	0, cr4, [r0], {2}
+ 800004a:	0c0c4001 	stceq	0, cr4, [ip], {1}
+ 800004e:	42404001 	submi	r4, r0, #1
+ 8000052:	Address 0x0000000008000052 is out of bounds.
+
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002041 	andeq	r2, r0, r1, asr #32
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000016 	andeq	r0, r0, r6, lsl r0
+  10:	726f4305 	rsbvc	r4, pc, #335544320	; 0x14000000
+  14:	2d786574 	cfldr64cs	mvdx6, [r8, #-464]!	; 0xfffffe30
+  18:	0600334d 	streq	r3, [r0], -sp, asr #6
+  1c:	094d070a 	stmdbeq	sp, {r1, r3, r8, r9, sl}^
+  20:	Address 0x0000000000000020 is out of bounds.
+
